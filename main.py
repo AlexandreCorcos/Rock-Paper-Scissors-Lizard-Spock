@@ -2,6 +2,18 @@ import random
 import time
 import sys
 
+"""
+ideas & ways to improve:
+! Fix the Would you like to play another round? statement that is showing when the user is trying to run the program for the first time 
+
+-display menu with the relevant options 
+-Add 2-player mode so that 2 people can play against each other
+-get input at the beginning to define if they want to play against the computer or a friend
+-Get users to input their name and make the output more personalized
+-run continuously until user prompts to exit
+-add input validation
+"""
+
 GAME_LIST = ["r", "p", "s", "l", "k"]
 SYMBOLS = ["👊", "✋", "✌️", "🤏", "🖖"]
 ITEMS_LIST = ["Rock", "Paper", "Scissors", "Lizard", "Spock"]
@@ -64,18 +76,20 @@ def game():
         computer_result = computer_choice()
         index_user = GAME_LIST.index(user_result)
         index_comp = GAME_LIST.index(computer_result)
-        print("-" * 30)
+        print("\033[34m-\033[0m" * 40)
         # try to use table
         #   YOU      |  COMPUTER
         # Spock 🖖  🆚  🤏 Lizard
         print(
             f"\nYou: {ITEMS_LIST[index_user]} - {SYMBOLS[index_user]}  🆚  {SYMBOLS[index_comp]} - {ITEMS_LIST[index_comp]} :Computer")
+        print("\033[34m-\033[0m" * 40)
 
-        print("-" * 30)
+        print(f"\033[33mRESULT: ", end="")
 
         if user_result == computer_result:
-            print("It's a tie!")
-            print(f"\nWin: {user_win} \nLose: {comp_win}")
+            print("It's a tie!\033[0m")
+            print(f"\n\033[32mWin: {user_win} \nLose: {comp_win}\033[0m")
+            print("\033[34m-\033[0m" * 40)
         elif (
                 (user_result == 'r' and (computer_result == 's' or computer_result == 'l')) or
                 (user_result == 's' and (computer_result == 'p' or computer_result == 'l')) or
@@ -83,13 +97,15 @@ def game():
                 (user_result == 'l' and (computer_result == 'k' or computer_result == 'p')) or
                 (user_result == 'k' and (computer_result == 's' or computer_result == 'r'))
         ):
-            print("You win!!! ✨")
+            print("You win!!! ✨\033[0m")
             user_win += 1
-            print(f"\nWin: {user_win} \nLose: {comp_win}")
+            print(f"\n\033[32mWin: {user_win} \nLose: {comp_win}\033[0m")
+            print("\033[34m-\033[0m" * 40)
         else:
-            print("Computer win!!! 😑")
+            print("Computer win!!! 😑\033[0m")
             comp_win += 1
-            print(f"\nWin: {user_win} \nLose: {comp_win}")
+            print(f"\n\033[32mWin: {user_win} \nLose: {comp_win}\033[0m")
+            print("\033[34m-\033[0m" * 40)
 
         if not continue_playing():
             print("Goodbye 👋")
